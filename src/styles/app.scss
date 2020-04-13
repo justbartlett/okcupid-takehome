@@ -1,0 +1,17 @@
+@import './reset.scss';
+@import './mixins.scss';
+@import './colors.scss';
+@import './global.scss';
+
+.container {
+	margin: 20px;
+	min-height: calc(100vh - 80px);
+	display: flex;
+	flex-direction: column;
+	@include breakpoint(medium) {
+		width: calc(100vw - 80px);
+		max-width: 1200px;
+		flex-direction: row;
+		margin: 40px auto;
+	}
+}

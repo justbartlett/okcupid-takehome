@@ -1,0 +1,11 @@
+@mixin breakpoint($point) {
+	/*
+	Easily extend breakpoints for various devices, e.g.:
+	@if $point == small {
+		@media(min-width: 576px) { @content; }
+	}
+	*/
+	@if $point == medium {
+		@media(min-width: 768px) { @content; }
+	}
+}

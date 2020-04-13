@@ -1,0 +1,19 @@
+@import './mixins.scss';
+@import './colors.scss';
+
+.edit {
+  background: $grey-light;
+	border-radius: 5px;
+  padding: 30px 20px 20px;
+  flex: 1;
+	@include breakpoint(medium) {
+    padding: 40px;
+  }
+  h1 {
+    margin-bottom: 30px;
+  }
+  .edit-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
