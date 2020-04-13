@@ -1,19 +1,22 @@
 import { Reducer } from 'redux';
 import { CreatorsToActions } from '../utils';
-import { FIELD_NAMES } from '../utils/constants';
+import { FIELD_NAMES, FIELDS } from '../utils/constants';
+import { randomTemplate } from '../utils/helpers';
 
 // Actions
 const actions = {
   SUBMIT_FIELD: "MADLIBS/SUBMIT_FIELD",
+  SUBMIT_ESSAY: "MADLIBS/SUBMIT_ESSAY",
+  RESET_TO_DEFAULT: "MADLIBS/RESET_TO_DEFAULT"
 } as const;
 
 
 // Initial State
 export interface MadlibState {
   fieldOrder: string[],
+  fields:  {},
   fieldAnswers: {},
   essayText: string,
-  counter: number
 }
 const initialState: MadlibState = {
   fieldOrder: [
@@ -24,9 +27,9 @@ const initialState: MadlibState = {
     FIELD_NAMES.messageIf,
     FIELD_NAMES.bar,
   ],
+  fields: FIELDS,
   fieldAnswers: {},
   essayText: "",
-  counter: 1,
 }
 
 // Reducer
@@ -36,7 +39,29 @@ const madlibReducer: Reducer<MadlibState, MadlibAction> = (
 ) => {
   switch (action.type) {
     case actions.SUBMIT_FIELD: {
-      return state;
+      const { fieldName, answer, template } = action.payload;
+      return {
+        ...state,
+        fieldAnswers: {
+          ...state.fieldAnswers,
+          [fieldName]: {
+            answer,
+            template
+          }
+        }
+      };
+    }
+    case actions.SUBMIT_ESSAY: {
+      const {essayText} = action.payload;
+      return {
+        ...state,
+        essayText
+      }
+    }
+    case actions.RESET_TO_DEFAULT: {
+      return {
+        ...initialState
+      }
     }
     default:
       return state;
@@ -46,9 +71,18 @@ export default madlibReducer;
 
 // Action creators
 export const actionCreators = {
-  submitField: (id: number, answer: string) => ({
-    type: actions.SUBMIT_FIELD,
-    payload: { fieldName: id, answer }
+  submitField: (fieldName: string, answer: string) => {
+    const template = randomTemplate(fieldName);
+    return {
+      type: actions.SUBMIT_FIELD,
+      payload: { fieldName, answer, template }
+    }
+  },
+  submitEssay: (essayText: string) => ({
+    type: actions.SUBMIT_ESSAY, payload: {essayText}
+  }),
+  resetToDefault: () => ({
+    type: actions.RESET_TO_DEFAULT, payload: null
   })
 }
 type MadlibAction = CreatorsToActions<typeof actionCreators>;

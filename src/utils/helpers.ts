@@ -1,5 +1,16 @@
 import { FIELD_NAMES } from "./constants";
 
+export function randomTemplate(fieldName: string) {
+  const templateList = getTextTemplates(fieldName);
+  return templateList[randomNumber(0, templateList.length)]
+}
+
+function randomNumber(min: number, max: number) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max-min)) + min;
+}
+
 export function getTextTemplates(fieldName: string) {
   switch (fieldName) {
     case FIELD_NAMES.hometown: {

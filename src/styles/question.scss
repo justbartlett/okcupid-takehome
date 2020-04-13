@@ -1,0 +1,21 @@
+@import './colors.scss';
+
+.question {
+  label {
+		display: block;
+		font-size: 18px;
+		color: $grey;
+		input {
+			margin: 10px 0 40px;
+			display: block;
+			border: 0;
+			height: 45px;
+			background: $white;
+			border-radius: 4px;
+			width: calc(100% - 20px);
+			font-size: 16px;
+			color: $grey;
+			padding: 0 10px;
+		}
+	}
+}
