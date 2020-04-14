@@ -2,11 +2,11 @@
 
 ## Thoughts
 
-All in all, an enjoyable exercise - Thank you for the challenge, I had fun. 
+Live preview: [https://peaceful-jackson-34a319.netlify.com/](https://peaceful-jackson-34a319.netlify.com/)
 
-I deviated from the starter project as react-redux now includes its own `useSelector` and `useDispatch` Hooks that can be used instead of connect - forgoing the need to wrap components in the `connect` higher order component (and avoiding VirtualDOM clutter). I did pass in questions in the about component so that you know I know how to use a HOC ;). 
+I deviated from the starter project as react-redux now includes its own `useSelector` and `useDispatch` Hooks that can be used instead of connect - forgoing the need to wrap components in the `connect` higher order component (and avoiding VirtualDOM clutter). I did pass in questions in the about component so that you know I know how to use a HOC ;). I also decided to tackle this project using TypeScript, however, didn't have the time to make as much use of it as I would have liked. 
 
-I also decided to tackle this project using TypeScript, however, didn't have the time to make as much use of it as I would have liked. 
+All in all, an enjoyable exercise - Thank you for the challenge, I had fun!~
 
 ## Project Structure
 
