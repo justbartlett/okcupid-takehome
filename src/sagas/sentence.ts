@@ -1,30 +1,9 @@
 import { fork, takeLatest, put, select } from 'redux-saga/effects';
-import {
-  actions,
-  actionCreators
-} from '../modules/madlibs';
-import { 
-  getTemplate,
-  randomArrayItem
-} from '../utils/helpers';
-
-interface Question {
-  name: string,
-  answer: string
-}
-
-interface Payload {
-  name: string,
-  answer: string
-}
-
-interface Action {
-  type: string,
-  payload: Payload
-}
+import { actions, actionCreators } from '../modules/madlibs';
+import { getTemplate, randomArrayItem } from '../utils/helpers';
+import { Action, Question } from '../utils/types';
 
 export function* setEssaySentenceSaga(action: Action) {
-  console.log(action);
   const { name } = action.payload;
   const state = yield select();
   const questions = state.madlib.questions;
