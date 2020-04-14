@@ -12,3 +12,19 @@ export interface Action {
   type: string,
   payload: Payload
 }
+
+export interface MadlibState {
+  questions: {question: string, name: string, answer: string}[],
+  essay: string,
+  templateSentences: string[],
+  essaySentences: string[],
+}
+
+export interface QuestionProps {
+  fieldText: any,
+  fieldName: string
+}
+
+export interface QuestionsProps {
+  questions: {question: string, name: string, answer: string}[];
+}

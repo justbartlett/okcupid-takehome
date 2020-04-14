@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import madlib, { MadlibState } from './madlibs';
+import madlib from './madlibs';
+import { MadlibState } from '../utils/types';
 
 export interface ApplicationState {
   madlib: MadlibState;

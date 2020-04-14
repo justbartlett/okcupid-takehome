@@ -1,10 +1,7 @@
 import React, { FC } from 'react';
 import Question from './Question';
+import { QuestionsProps } from '../utils/types';
 import '../styles/questions.scss';
-
-interface QuestionsProps {
-  questions: {question: string, name: string, answer: string}[];
-}
 
 const Questions: FC<QuestionsProps> = ({questions}) => {
   return (

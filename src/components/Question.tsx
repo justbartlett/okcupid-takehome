@@ -1,12 +1,8 @@
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { actionCreators } from '../modules/madlibs';
+import { QuestionProps } from '../utils/types';
 import '../styles/question.scss';
-
-interface QuestionProps {
-  fieldText: any,
-  fieldName: string
-}
 
 const Question: FC<QuestionProps> = ({fieldText, fieldName}) => {
   const dispatch = useDispatch();

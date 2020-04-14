@@ -1,6 +1,7 @@
 import { Reducer } from 'redux';
 import { CreatorsToActions } from '../utils';
 import { questionsOrdered } from '../utils/helpers';
+import { MadlibState } from '../utils/types';
 
 // Actions
 export const actions = {
@@ -11,14 +12,7 @@ export const actions = {
   RESET_STATE: "MADLIBS/RESET_STATE",
 } as const;
 
-
 // Initial State
-export interface MadlibState {
-  questions: {question: string, name: string, answer: string}[],
-  essay: string,
-  templateSentences: string[],
-  essaySentences: string[],
-}
 const initialState: MadlibState = {
   questions: questionsOrdered(),
   essay: '',
