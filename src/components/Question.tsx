@@ -14,7 +14,11 @@ const Question: FC<QuestionProps> = ({fieldText, fieldName}) => {
     <div className="question">
       <label>
         {fieldText}
-        <input type="text" name={fieldName} onBlur={(evt) => dispatch(actionCreators.setField(fieldName, evt.target.value))} />
+        <input type="text" name={fieldName} onBlur={(evt) => {
+          if (evt.target.value) {
+            return dispatch(actionCreators.setField(fieldName, evt.target.value))
+          }
+        }} />
       </label>
     </div>
   );
