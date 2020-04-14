@@ -95,3 +95,6 @@ const randomNumber = (length: number) =>
 export const randomArrayItem = (array: any) => 
   array[randomNumber(array.length)];
 
+export const checkNull = (val: string) => {
+  return val !== '';
+}
