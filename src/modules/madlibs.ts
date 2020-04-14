@@ -7,7 +7,8 @@ export const actions = {
   SET_QUESTION: "MADLIBS/SET_QUESTION",
   SET_ESSAY_SENTENCE: "MADLIBS/SET_ESSAY_TEXT_SENTENCE",
   SET_TEMPLATE_SENTENCE: "MADLIBS/SET_TEMPLATE_SENTENCE",
-  SET_ESSAY: "MADLIBS/SET_ESSAY"
+  SET_ESSAY: "MADLIBS/SET_ESSAY",
+  RESET_STATE: "MADLIBS/RESET_STATE",
 } as const;
 
 
@@ -61,7 +62,11 @@ const madlibReducer: Reducer<MadlibState, MadlibAction> = (
         essay: action.payload.essayText
       }
     }
-
+    case actions.RESET_STATE: {
+      return {
+        ...initialState
+      }
+    }
     default:
       return state;
   }
@@ -101,7 +106,11 @@ export const actionCreators = {
         essayText
       }
     }
-  }
-
+  },
+  resetState: () => {
+    return {
+      type: actions.RESET_STATE,
+    }
+  },
 }
 type MadlibAction = CreatorsToActions<typeof actionCreators>;
