@@ -89,7 +89,7 @@ export const getTemplate = (name: string) => {
   }
 }
 
-const randomNumber = (length: any) => 
+const randomNumber = (length: number) => 
   Math.floor(Math.random() * length);
 
 export const randomArrayItem = (array: any) => 

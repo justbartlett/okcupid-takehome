@@ -8,13 +8,29 @@ import {
   randomArrayItem
 } from '../utils/helpers';
 
-export function* setEssaySentenceSaga(action: any) {
+interface Question {
+  name: string,
+  answer: string
+}
+
+interface Payload {
+  name: string,
+  answer: string
+}
+
+interface Action {
+  type: string,
+  payload: Payload
+}
+
+export function* setEssaySentenceSaga(action: Action) {
+  console.log(action);
   const { name } = action.payload;
   const state = yield select();
   const questions = state.madlib.questions;
-  const answer = questions.reduce((current: any, question: any) => question.name === name ? question.answer : current, '');
+  const answer = questions.reduce((current: string, question: Question) => question.name === name ? question.answer : current, '');
   const template = randomArrayItem(getTemplate(name));
-  const index = questions.reduce((current: any, question:any, i:any) => question.name === name ? i : current, -1)
+  const index = questions.reduce((current: string, question: Question, i:number) => question.name === name ? i : current, -1)
   const essaySentence = template.replace(/\$answer/, answer);
   yield put (actionCreators.setTemplateSentence(template, index));
   yield put(actionCreators.setEssaySentence(essaySentence, index))
