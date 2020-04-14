@@ -1,15 +1,26 @@
 import React, { FC } from 'react';
+import {useSelector} from 'react-redux';
 import {NavLink} from 'react-router-dom';
+import { ApplicationState } from '../modules';
 import '../styles/essay.scss';
 
-interface EssayProps {
-}
+const templatesSelector = (state: ApplicationState) => state.madlib.templateSentences;
+const answersSelector = (state: ApplicationState) => state.madlib.questions
 
-const Essay: FC<EssayProps> = () => {
+const Essay: FC = () => {
+  const templates = useSelector(templatesSelector);
+  const answers = useSelector(answersSelector);
+
   return (
     <div className="essay">
       <h2>Your essay text</h2>
-      <p>Originally from Narnia. Can't get enough Turkish delight. I turn my enemies to stone whenever I get the chance. Send me a message if you don't mind winter.</p>
+      <p>
+        {templates.map((template: string, index: number) => {
+          const reg = new RegExp(/(\$\banswer+\b)/, 'gi');
+          const parts = template.split(reg);
+          return <span key={index}>{parts.map((part: string, key: number) => (part.match(reg) ? <strong key={key}>{answers[index].answer}</strong> : part))} </span>;
+        })}
+      </p>
       <NavLink to="/edit">
         <button>Edit</button>
       </NavLink>

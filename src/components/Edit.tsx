@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
+import {useSelector} from 'react-redux';
 import {NavLink} from 'react-router-dom';
+import { ApplicationState } from '../modules';
 import "../styles/edit.scss";
 
-interface EditProps {
-}
+const answersSelector = (state: ApplicationState) => state.madlib.essay;
 
-const Edit: FC<EditProps> = () => {
+const Edit: FC = () => {
+  const essay = useSelector(answersSelector);
   return (
     <div className="container">
       <div className="edit">
         <div className="edit-container">
           <h1>Your essay text</h1>
-          <textarea readOnly value="Originally from Narnia. Can't get enough Turkish delight. I turn my enemies to stone whenever I get the chance. Send me a message if you don't mind winter." />
+          <textarea defaultValue={essay} />
           <NavLink to="/">
             <button>Start over</button>
           </NavLink>

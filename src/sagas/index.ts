@@ -1,6 +1,8 @@
 import { fork } from 'redux-saga/effects';
-import app from './app';
+import sentence from './sentence';
+import essay from './essay';
 
 export default function* rootSaga() {
-  yield fork(app);
+  yield fork(sentence);
+  yield fork(essay);
 }

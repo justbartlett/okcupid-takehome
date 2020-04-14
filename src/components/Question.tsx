@@ -1,18 +1,20 @@
 import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { actionCreators } from '../modules/madlibs';
 import '../styles/question.scss';
 
 interface QuestionProps {
   fieldText: any,
-  fieldName: string,
-  onBlur: () => void
+  fieldName: string
 }
 
-const Question: FC<QuestionProps> = ({fieldText, fieldName, onBlur}) => {
+const Question: FC<QuestionProps> = ({fieldText, fieldName}) => {
+  const dispatch = useDispatch();
   return (
     <div className="question">
       <label>
         {fieldText}
-        <input type="text" name={fieldName} onBlur={onBlur} />
+        <input type="text" name={fieldName} onBlur={(evt) => dispatch(actionCreators.setField(fieldName, evt.target.value))} />
       </label>
     </div>
   );

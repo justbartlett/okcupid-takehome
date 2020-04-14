@@ -3,7 +3,7 @@ import Question from './Question';
 import '../styles/questions.scss';
 
 interface QuestionsProps {
-  questions: {};
+  questions: {question: string, name: string, answer: string}[];
 }
 
 const Questions: FC<QuestionsProps> = ({questions}) => {
@@ -11,9 +11,9 @@ const Questions: FC<QuestionsProps> = ({questions}) => {
     <div className="questions">
       <h1>About Me</h1>
       <form>
-        {Object.entries(questions).map(([key, value]) => (
-          <Question key={key} fieldText={value} fieldName={key} onBlur={() => {}} />
-        ))}
+        {questions.map((question, key) => (
+            <Question key={key} fieldText={question.question} fieldName={question.name} />
+          ))}
       </form>
     </div>
   );

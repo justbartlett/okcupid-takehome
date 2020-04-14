@@ -1,35 +1,28 @@
 import { Reducer } from 'redux';
 import { CreatorsToActions } from '../utils';
-import { FIELD_NAMES, FIELDS } from '../utils/constants';
-import { randomTemplate } from '../utils/helpers';
+import { questionsOrdered } from '../utils/helpers';
 
 // Actions
-const actions = {
-  SUBMIT_FIELD: "MADLIBS/SUBMIT_FIELD",
-  SUBMIT_ESSAY: "MADLIBS/SUBMIT_ESSAY",
-  RESET_TO_DEFAULT: "MADLIBS/RESET_TO_DEFAULT"
+export const actions = {
+  SET_QUESTION: "MADLIBS/SET_QUESTION",
+  SET_ESSAY_SENTENCE: "MADLIBS/SET_ESSAY_TEXT_SENTENCE",
+  SET_TEMPLATE_SENTENCE: "MADLIBS/SET_TEMPLATE_SENTENCE",
+  SET_ESSAY: "MADLIBS/SET_ESSAY"
 } as const;
 
 
 // Initial State
 export interface MadlibState {
-  fieldOrder: string[],
-  fields:  {},
-  fieldAnswers: {},
-  essayText: string,
+  questions: {question: string, name: string, answer: string}[],
+  essay: string,
+  templateSentences: string[],
+  essaySentences: string[],
 }
 const initialState: MadlibState = {
-  fieldOrder: [
-    FIELD_NAMES.hometown,
-    FIELD_NAMES.favoriteFood,
-    FIELD_NAMES.loveToDo,
-    FIELD_NAMES.music,
-    FIELD_NAMES.messageIf,
-    FIELD_NAMES.bar,
-  ],
-  fields: FIELDS,
-  fieldAnswers: {},
-  essayText: "",
+  questions: questionsOrdered(),
+  essay: '',
+  templateSentences: new Array(6).fill(''),
+  essaySentences: new Array(6).fill('')
 }
 
 // Reducer
@@ -38,31 +31,37 @@ const madlibReducer: Reducer<MadlibState, MadlibAction> = (
   action: MadlibAction
 ) => {
   switch (action.type) {
-    case actions.SUBMIT_FIELD: {
-      const { fieldName, answer, template } = action.payload;
+    case actions.SET_QUESTION: {
+      const { name, answer } = action.payload;
       return {
         ...state,
-        fieldAnswers: {
-          ...state.fieldAnswers,
-          [fieldName]: {
-            answer,
-            template
-          }
-        }
+        questions: state.questions.map((question) =>
+          question.name === name ? {...question, answer: answer} : question
+        )
       };
     }
-    case actions.SUBMIT_ESSAY: {
-      const {essayText} = action.payload;
+    case actions.SET_ESSAY_SENTENCE: {
       return {
         ...state,
-        essayText
+        essaySentences: state
+          .essaySentences.map((sentence: string, i: number) => i === action.payload.index ?
+            action.payload.essay : sentence)
       }
     }
-    case actions.RESET_TO_DEFAULT: {
+    case actions.SET_TEMPLATE_SENTENCE: {
       return {
-        ...initialState
+        ...state,
+        templateSentences: state
+          .templateSentences.map((template: string, i: number) => i === action.payload.index ? action.payload.templateSentence : template)
       }
     }
+    case actions.SET_ESSAY: {
+      return {
+        ...state,
+        essay: action.payload.essayText
+      }
+    }
+
     default:
       return state;
   }
@@ -71,18 +70,38 @@ export default madlibReducer;
 
 // Action creators
 export const actionCreators = {
-  submitField: (fieldName: string, answer: string) => {
-    const template = randomTemplate(fieldName);
+  setField: (name: string, answer: string) => {
     return {
-      type: actions.SUBMIT_FIELD,
-      payload: { fieldName, answer, template }
+      type: actions.SET_QUESTION,
+      payload: { name, answer}
     }
   },
-  submitEssay: (essayText: string) => ({
-    type: actions.SUBMIT_ESSAY, payload: {essayText}
-  }),
-  resetToDefault: () => ({
-    type: actions.RESET_TO_DEFAULT, payload: null
-  })
+  setEssaySentence: (essay: string, index: number) => {
+    return {
+      type: actions.SET_ESSAY_SENTENCE,
+      payload: {
+        essay,
+        index
+      }
+    }
+  },
+  setTemplateSentence: (templateSentence: string, index: number) => {
+    return {
+      type: actions.SET_TEMPLATE_SENTENCE,
+      payload: {
+        templateSentence,
+        index
+      }
+    }
+  },
+  setEssay: (essayText: string) => {
+    return {
+      type: actions.SET_ESSAY,
+      payload: {
+        essayText
+      }
+    }
+  }
+
 }
 type MadlibAction = CreatorsToActions<typeof actionCreators>;
