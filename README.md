@@ -1,5 +1,30 @@
 # OkCupid Take-Home Exercise
 
+## Thoughts
+
+All in all, an enjoyable exercise - Thank you for the challenge, I had fun. 
+
+I deviated from the starter project as react-redux now includes its own `useSelector` and `useDispatch` Hooks that can be used instead of connect - forgoing the need to wrap components in the `connect` higher order component (and avoiding VirtualDOM clutter). I did pass in questions in the about component so that you know I know how to use a HOC ;). 
+
+I also decided to tackle this project using TypeScript, however, didn't have the time to make as much use of it as I would have liked. 
+
+## Project Structure
+
+Follows the 'ducks' style pattern. I've organized the project in a way that hopefully makes sense to you and leaves the door open for scaling were it to become a larger project - so you could easily extend multiple ducks files in modules, or multiple sagas in sagas, etc.
+
+## Styles
+
+The styles I kept pretty simple - BEM or Atomic naming conventions felt a bit like overkill for something this size. I hope the naming & organization/structure makes sense to ya'll, generally I do something along the lines of reset > variables > globals > component. Alternatively, we could have gone stylized components / storybook.
+
+## Debugging
+
+For a lovely debugging experience I suggest grabbing a copy of [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
+
+![Image of Dev Tools](https://i.ibb.co/jfpH4jg/devtools.png)
+
+
+## Welcome
+
 Welcome to the OkCupid take-home exercise! This will roughly model the type of
 projects you'd work on at OkCupid.
 
