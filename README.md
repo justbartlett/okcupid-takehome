@@ -1,44 +1,82 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# OkCupid Take-Home Exercise
 
-## Available Scripts
+Welcome to the OkCupid take-home exercise! This will roughly model the type of
+projects you'd work on at OkCupid.
 
-In the project directory, you can run:
+This repository contains the structure of a React/Redux application, as well as
+a webpack setup to compile the files. We'd like you to use them to implement a
+feature for us.
 
-### `yarn start`
+Approach this exercise as if you worked here: make sure your code is clear and
+concise, and use your time wisely.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## The feature
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+A feature of OkCupid, and one of the things that differentiates our site, is
+the essay -- a space for people to write about themselves on their profile. But
+it can be hard for users to write so freely without a prompt.
 
-### `yarn test`
+We'd like to make writing an essay easy and fun, and one idea we had is to make
+a [Mad Libs](https://en.wikipedia.org/wiki/Mad_Libs)-style game.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Your job is to make a small app using React/Redux and Scss which asks a user
+some simple questions, and assembles the answers into a passable essay.
 
-### `yarn build`
+## How to use
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+First, make sure you have a modern version of `node` and `yarn.`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Run `yarn install` before getting started.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Make your changes to these files, then run `yarn start` to run the compiler.
 
-### `yarn eject`
+A new window should open; if not, you can visit your page at
+http://127.0.0.1:3000/. Any changes to the project files should trigger a new
+build, and a refresh.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## What's there
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Screenshots of the app's design, in `/assets/`.
+* The main app folder, `/src/`, where you'll be making your changes.
+* A [ducks](https://medium.com/@scbarrus/the-ducks-file-structure-for-redux-d63c41b7035c#.5chqfp84p)
+  file, `/src/madlibs.js`. This file contains the reducer, the initial state,
+  along with some example actions.
+* A constants file, `/src/constants.js`. It contains the questions and
+  potential essay templates.
+* A helpers file, `/src/helpers.js`. It contains a function with templates
+  for a given field.
+* A folder for React components, `/src/components/`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Requirements
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Prompts appear in the left column, and the essay preview on the right.
+* Each "prompt" consists of a question and an input.
+* When the user blurs the input, the app should "save" their response and
+  update the essay preview.
+* To generate the essay preview, choose one of the available templates at
+  random.
+* Changing one answer should re-roll that answer's template, but not the
+  chosen templates of other fields.
+* The user's responses in the essay preview should be bold.
+* When the user has answered and blurred all questions, an "Edit" button
+  appears.
+* When a user clicks "Edit", replace both columns with a centered textarea
+  containing the generated essay content.
+* When a user clicks "Start over", they should see the original screen
+  without any user text.
 
-## Learn More
+Some more details:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Don't worry about vendor prefixes; target the latest version of Chrome.
+* The app should compile without any errors.
+* Create as many or as few subcomponents as you like.
+* Use whatever libraries you want. (But remember: if you worked here, we would
+  want to pay attention to payload size. Choose wisely!)
+* Eyeball the margins, paddings, and colors.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## When you're done
+
+Remove the `node_modules` directory, zip up this project directory, and send it
+back to us.
+
+Thanks for your time, and good luck! We look forward to hearing from you!
